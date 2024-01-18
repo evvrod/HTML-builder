@@ -9,6 +9,7 @@ process.stdin.setEncoding('utf-8');
 let writableStream = fs.createWriteStream(dirPath);
 
 console.log('Write string');
+
 process.stdin.on('data', (data) => {
   if (String(data).split(eol)[0] !== 'exit') {
     writableStream.write(String(data));
