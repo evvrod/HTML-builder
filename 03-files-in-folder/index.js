@@ -3,8 +3,6 @@ const fs = require('node:fs/promises');
 const path = require('node:path');
 const dirPath = path.join(__dirname, '/secret-folder');
 
-const { stat } = require('node:fs');
-
 findFiles(dirPath);
 
 async function getSize(pathFile) {
@@ -23,8 +21,7 @@ async function findFiles(pathDir) {
       let file = path.join(el.path, el.name);
       if (!el.isDirectory()) {
         let size = await getSize(file);
-        process.stdout.write(`${el.name} - ${path.extname(file).slice(1)} - ${size}\n`);
-        // console.log(`${el.name.slice(0,el.name.length-4)} - ${path.extname(file).slice(1)} - ${size}`)
+        process.stdout.write(`${el.name.replace(path.extname(file), '')} - ${path.extname(file).replace('.', '')} - ${size}\n`);
       }
     })
   } catch (err) {
