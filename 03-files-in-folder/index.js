@@ -20,7 +20,7 @@ async function writeInfoFile(dirFrom) {
     files.forEach(async (el) => {
       let file = path.join(el.path, el.name);
       if (!el.isDirectory()) {
-        let size = await getSize(file);
+        let size = await getSize(file) ;
         process.stdout.write(`${el.name.replace(path.extname(file), '')} - ${path.extname(file).replace('.', '')} - ${size}\n`);
       }
     })

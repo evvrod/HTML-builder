@@ -10,23 +10,8 @@ mergeFiles(dirPathStyles, dirPathTo, outputFile);
 
 async function mergeFiles(dirFrom, dirTo, fileTo) {
   try {
-    await createDir(dirTo);
     let files = await findFiles(dirFrom);
     await copyToFile(fileTo, files);
-  } catch (err) {
-    console.log(err);
-  }
-}
-
-async function createDir(dirTo) {
-  try {
-    try {
-      await fsp.access(dirTo);
-      await fsp.rm(dirTo, { recursive: true, });
-      await fsp.mkdir(dirTo, { recursive: true, });
-    } catch {
-      await fsp.mkdir(dirTo, { recursive: true, });
-    }
   } catch (err) {
     console.log(err);
   }
