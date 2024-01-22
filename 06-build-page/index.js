@@ -2,19 +2,18 @@ const fsp = require('node:fs/promises');
 const fs = require('node:fs');
 const readline = require('node:readline');
 const path = require('node:path');
-const dirPathStyles = path.join(__dirname, '/styles');
 
 const dirPathTo = path.join(__dirname, '/project-dist');
-const outputFileHtml = path.join(dirPathTo, 'index.html');
-const outputFileCss = path.join(dirPathTo, 'style.css');
+const inputFileHtml = path.join(dirPathTo, 'index.html');
+const inputFileCss = path.join(dirPathTo, 'style.css');
 
 const dirAssets = path.join(__dirname, '/assets');
 const dirCss = path.join(__dirname, '/styles');
 const dirHtml = path.join(__dirname, '/components');
 
-buildPages(dirPathStyles, dirPathTo, dirAssets, outputFileHtml, outputFileCss);
+buildPages(dirPathTo, dirAssets, inputFileHtml, inputFileCss);
 
-async function buildPages(dirFrom, dirTo, dirAssets, fileHtml, fileCss) {
+async function buildPages(dirTo, dirAssets, fileHtml, fileCss) {
   try {
     await createDir(dirTo);
     await mergeFiles(dirCss, fileCss);
