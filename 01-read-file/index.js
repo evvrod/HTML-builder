@@ -1,16 +1,26 @@
+const fs = require("node:fs");
 const path = require('node:path');
-const dirPath = path.join(__dirname, '/text.txt');
+const fileFrom = path.join(__dirname, '/text.txt');
 
-var fs = require("node:fs");
-var data = '';
 
-var readerStream = fs.createReadStream(dirPath); 
-readerStream.setEncoding('UTF8');
+fromFileToConsole(fileFrom);
 
-readerStream.on('data', function (chunk) {
-  data += chunk;
-});
+function fromFileToConsole(fileFrom) {
+  try {
+    let readerStream = fs.createReadStream(fileFrom, "utf-8");
+    readerStream.pipe(process.stdout);
+  } catch (err) {
+    console.log(err);
+  }
+}
 
-readerStream.on('end', function () {
-  console.log(data);
-});
+// let data = '';
+// let readerStream = fs.createReadStream(fileFrom, "utf-8");
+
+// readerStream.on('data', function (chunk) {
+//   data += chunk;
+// });
+
+// readerStream.on('end', function () {
+//   console.log(data);
+// });

@@ -9,9 +9,13 @@ const outputFile = path.join(dirPathTo, 'bundle.css');
 mergeFiles(dirPathStyles, dirPathTo, outputFile);
 
 async function mergeFiles(dirFrom, dirTo, fileTo) {
-  await createDir(dirTo);
-  let files = await findFiles(dirFrom);
-  await copyToFile(fileTo, files);
+  try {
+    await createDir(dirTo);
+    let files = await findFiles(dirFrom);
+    await copyToFile(fileTo, files);
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 async function createDir(dirTo) {
@@ -23,8 +27,7 @@ async function createDir(dirTo) {
     } catch {
       await fsp.mkdir(dirTo, { recursive: true, });
     }
-  }
-  catch (err) {
+  } catch (err) {
     console.log(err);
   }
 }

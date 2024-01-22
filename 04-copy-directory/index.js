@@ -11,8 +11,7 @@ async function copyDir(dirFrom, dirTo) {
     await createDir(dirTo);
     let files = await findFiles(dirFrom);
     await copyFile(files, dirTo);
-  }
-  catch (err) {
+  } catch (err) {
     console.log(err);
   }
 }
@@ -26,8 +25,7 @@ async function createDir(dirTo) {
     } catch {
       await fsp.mkdir(dirTo, { recursive: true, });
     }
-  }
-  catch (err) {
+  } catch (err) {
     console.log(err);
   }
 }
@@ -48,7 +46,7 @@ async function copyFile(files, dirTo) {
         await fsp.copyFile(file, path.join(dirTo, el.name));
       }
     })
-  } catch {
-    console.error(err);
+  } catch (err) {
+    console.log(err);
   }
 }
